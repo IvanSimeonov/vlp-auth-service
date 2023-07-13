@@ -4,15 +4,27 @@ spring:
   application:
     name: vlp-auth-service
   datasource:
-    url: jdbc:h2:mem:auth-db
+    url: jdbc:h2:file:./src/main/resources/data/auth-db;AUTO_SERVER=true
     username: vlp
     password: vlp
     driver-class-name: org.h2.Driver
   jpa:
+    database: h2
     database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
   h2:
     console:
       enabled: true
 management:
   server:
     port: 44101
+jwt:
+  secret: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+  expirationMs: 1200000
+  refreshToken:
+    expirationMs: 603148700
