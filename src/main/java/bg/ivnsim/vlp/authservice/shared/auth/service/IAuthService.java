@@ -32,4 +32,6 @@ public interface IAuthService {
             HttpServletRequest request,
             HttpServletResponse response
     ) throws IOException;
+
+    void validateToken(String token) throws Exception;
 }

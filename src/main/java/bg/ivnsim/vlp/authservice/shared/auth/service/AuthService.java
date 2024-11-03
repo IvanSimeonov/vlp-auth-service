@@ -80,4 +80,15 @@ public class AuthService implements IAuthService{
     public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
     }
+
+    @Override
+    public void validateToken(String token) throws Exception {
+        var username = this.jwtService.extractUsername(token);
+        var user = this.userRepository.findByEmail(username);
+        if (user.isPresent()) {
+            this.jwtService.validateToken(token, user.get());
+        } else {
+            throw new Exception("User not found");
+        }
+    }
 }
